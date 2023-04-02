@@ -8,8 +8,10 @@ import java.util.List;
 public class BookRepo {
     @Autowired
     private List<Book> books;
+    private static long currentId = -1;
 
     public void addBook(Book book){
+        book.setId(currentId++);
         books.add(book);
     }
 
@@ -18,5 +20,9 @@ public class BookRepo {
                 .filter(e ->(e.getId() == id))
                 .findFirst()
                 .get();
+    }
+
+    public List<Book> getAll(){
+        return books;
     }
 }
